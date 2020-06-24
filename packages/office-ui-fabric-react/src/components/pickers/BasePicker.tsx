@@ -19,6 +19,7 @@ import {
   ISuggestionsProps,
   ISuggestionsStyleProps,
   ISuggestionsStyles,
+  SuggestionActionType,
 } from './Suggestions/Suggestions.types';
 import { getStyles as suggestionsStyles } from './Suggestions/Suggestions.styles';
 import { SuggestionsController } from './Suggestions/SuggestionsController';
@@ -45,6 +46,7 @@ export interface IBasePickerState {
   suggestionsLoading?: boolean;
   isResultsFooterVisible?: boolean;
   selectedIndices?: number[];
+  selectedAction: SuggestionActionType;
 }
 
 /**
@@ -131,6 +133,7 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
       isFocused: false,
       isSearching: false,
       selectedIndices: [],
+      selectedAction: SuggestionActionType.none,
     };
   }
 
@@ -661,6 +664,7 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
           ) {
             ev.preventDefault();
             ev.stopPropagation();
+            this.setState({ selectedAction: SuggestionActionType.none });
           } else {
             if (
               this.suggestionElement.current &&
@@ -669,14 +673,15 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
             ) {
               ev.preventDefault();
               ev.stopPropagation();
-              this.suggestionElement.current.focusAboveSuggestions();
+              const newSelectedAction = this.suggestionElement.current.focusAboveSuggestions();
               this.suggestionStore.deselectAllSuggestions();
-              this.forceUpdate();
+              this.setState({ selectedAction: newSelectedAction });
             } else {
               if (this.suggestionStore.previousSuggestion()) {
                 ev.preventDefault();
                 ev.stopPropagation();
                 this.onSuggestionSelect();
+                this.setState({ selectedAction: SuggestionActionType.none });
               }
             }
           }
@@ -691,6 +696,7 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
           ) {
             ev.preventDefault();
             ev.stopPropagation();
+            this.setState({ selectedAction: SuggestionActionType.none });
           } else {
             if (
               this.suggestionElement.current &&
@@ -699,9 +705,9 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
             ) {
               ev.preventDefault();
               ev.stopPropagation();
-              this.suggestionElement.current.focusBelowSuggestions();
+              const newSelectedAction = this.suggestionElement.current.focusBelowSuggestions();
               this.suggestionStore.deselectAllSuggestions();
-              this.forceUpdate();
+              this.setState({ selectedAction: newSelectedAction });
             } else {
               if (this.suggestionStore.nextSuggestion()) {
                 ev.preventDefault();
@@ -855,6 +861,13 @@ export class BasePicker<T, P extends IBasePickerProps<T>> extends React.Componen
 
   protected getActiveDescendant() {
     const currentIndex = this.suggestionStore.currentIndex;
+    if (currentIndex === -1) {
+      return this.state.selectedAction === SuggestionActionType.searchMore
+        ? 'sug-searchMore'
+        : this.state.selectedAction === SuggestionActionType.forceResolve
+        ? 'sug-forceResolve'
+        : '';
+    }
     return currentIndex > -1 && !this.state.suggestionsLoading ? 'sug-' + currentIndex : undefined;
   }
 

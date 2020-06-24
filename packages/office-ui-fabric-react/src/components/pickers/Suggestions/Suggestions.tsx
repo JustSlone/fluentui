@@ -169,32 +169,34 @@ export class Suggestions<T> extends React.Component<ISuggestionsProps<T>, ISugge
     return (
       <div className={this._classNames.root} {...divProps}>
         <Announced message={this._getAlertText()} aria-live="polite" />
-
         {headerText ? <div className={this._classNames.title}>{headerText}</div> : null}
+        {isLoading && <Spinner {...spinnerClassNameOrStyles} label={loadingText} />}
         {forceResolveText && this._shouldShowForceResolve() && (
           <CommandButton
             componentRef={this._forceResolveButton}
             className={this._classNames.forceResolveButton}
             onClick={this._forceResolve}
+            id={'sug-forceResolve'}
             data-automationid={'sug-forceResolve'}
           >
             {forceResolveText}
           </CommandButton>
         )}
-        {isLoading && <Spinner {...spinnerClassNameOrStyles} label={loadingText} />}
         {hasNoSuggestions
           ? onRenderNoResultFound
             ? onRenderNoResultFound(undefined, noResults)
             : noResults()
           : this._renderSuggestions()}
-        {searchForMoreText && moreSuggestionsAvailable && (
+        {this.props.searchForMoreText && this.props.moreSuggestionsAvailable && (
           <CommandButton
+            id={'sug-searchMore'}
             componentRef={this._searchForMoreButton}
             className={this._classNames.searchForMoreButton}
             iconProps={{ iconName: 'Search' }}
+            aria-selected={this.state.selectedActionType === SuggestionActionType.searchMore}
             onClick={this._getMoreResults}
           >
-            {searchForMoreText}
+            {this.props.searchForMoreText}
           </CommandButton>
         )}
         {isSearching ? <Spinner {...spinnerClassNameOrStyles} label={searchingText} /> : null}
@@ -294,20 +296,28 @@ export class Suggestions<T> extends React.Component<ISuggestionsProps<T>, ISugge
     }
   }
 
-  public focusAboveSuggestions(): void {
+  public focusAboveSuggestions(): SuggestionActionType {
+    let newSuggestionAction = SuggestionActionType.none;
     if (this._forceResolveButton.current) {
-      this.setState({ selectedActionType: SuggestionActionType.forceResolve });
+      newSuggestionAction = SuggestionActionType.forceResolve;
+      this.setState({ selectedActionType: newSuggestionAction });
     } else if (this._searchForMoreButton.current) {
+      newSuggestionAction = SuggestionActionType.searchMore;
       this.setState({ selectedActionType: SuggestionActionType.searchMore });
     }
+    return newSuggestionAction;
   }
 
-  public focusBelowSuggestions(): void {
+  public focusBelowSuggestions(): SuggestionActionType {
+    let newSuggestionAction = SuggestionActionType.none;
     if (this._searchForMoreButton.current) {
-      this.setState({ selectedActionType: SuggestionActionType.searchMore });
+      newSuggestionAction = SuggestionActionType.searchMore;
+      this.setState({ selectedActionType: newSuggestionAction });
     } else if (this._forceResolveButton.current) {
+      newSuggestionAction = SuggestionActionType.forceResolve;
       this.setState({ selectedActionType: SuggestionActionType.forceResolve });
     }
+    return newSuggestionAction;
   }
 
   public focusSearchForMoreButton(): void {
@@ -376,7 +386,7 @@ export class Suggestions<T> extends React.Component<ISuggestionsProps<T>, ISugge
         className={this._classNames.suggestionsContainer}
         id={suggestionsListId}
         role="listbox"
-        aria-label={suggestionsContainerAriaLabel}
+        aria-label={this.props.suggestionsContainerAriaLabel}
       >
         {suggestions.map((suggestion, index) => (
           <div

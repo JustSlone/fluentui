@@ -15,10 +15,10 @@ export interface ISuggestions<T> {
   executeSelectedAction: () => void;
 
   /** Focus on the ForceResolve action above the suggestions. If not available then focus on SearchMore action. */
-  focusAboveSuggestions: () => void;
+  focusAboveSuggestions: () => SuggestionActionType;
 
   /** Focus on the SearchMore action below the suggestions. If not available then focus on ForceResolve action. */
-  focusBelowSuggestions: () => void;
+  focusBelowSuggestions: () => SuggestionActionType;
 
   /** Focus the SearchMore action button. */
   focusSearchForMoreButton: () => void;

@@ -26,6 +26,20 @@ const _testTags: ITag[] = [
   'violet',
   'white',
   'yellow',
+  'aaa',
+  'aab',
+  'aac',
+  'aad',
+  'aae',
+  'aaf',
+  'aag',
+  'aah',
+  'aai',
+  'aaj',
+  'aak',
+  'aal',
+  'aam',
+  'aan',
 ].map(item => ({ key: item, name: item }));
 
 export interface ITagPickerDemoPageState {
@@ -78,8 +92,13 @@ export class TagPickerBasicExample extends React.Component<{}, ITagPickerDemoPag
           onItemSelected={this._onItemSelected}
           getTextFromItem={this._getTextFromItem}
           pickerSuggestionsProps={{
-            suggestionsHeaderText: 'Suggested Tags',
+            suggestionsHeaderText: 'Showing top 3 Suggestion Tags',
             noResultsFoundText: 'No Color Tags Found',
+            searchForMoreText: 'Show More 3 Items',
+            resultsMaximumNumber: 10,
+            suggestionsContainerAriaLabel: 'Showing top 3 Suggestion Tags',
+            forceResolveText: 'force resolve',
+            showForceResolve: () => true,
           }}
           itemLimit={2}
           disabled={this.state.isPickerDisabled}
