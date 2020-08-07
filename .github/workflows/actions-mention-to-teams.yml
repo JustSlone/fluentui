@@ -16,8 +16,10 @@ on:
 jobs:
   mention-to-teams:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Run
+        continue-on-error: true
         uses: JustSlone/actions-mention-to-teams@v0.4-beta
         with:
           teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
