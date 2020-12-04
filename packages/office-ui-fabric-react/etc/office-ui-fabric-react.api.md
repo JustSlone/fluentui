@@ -1891,6 +1891,7 @@ export interface IBreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
     onRenderItem?: IRenderFunction<IBreadcrumbItem>;
     onRenderOverflowIcon?: IRenderFunction<IButtonProps>;
     overflowAriaLabel?: string;
+    overflowButtonAs?: IComponentAs<IButtonProps>;
     overflowIndex?: number;
     // (undocumented)
     styles?: IStyleFunctionOrObject<IBreadcrumbStyleProps, IBreadcrumbStyles>;
@@ -5095,6 +5096,7 @@ export interface IGroupedListProps extends React.ClassAttributes<GroupedListBase
     onRenderCell: (nestingDepth?: number, item?: any, index?: number) => React.ReactNode;
     onShouldVirtualize?: (props: IListProps) => boolean;
     role?: string;
+    rootListProps?: IListProps;
     selection?: ISelection;
     selectionMode?: SelectionMode;
     styles?: IStyleFunctionOrObject<IGroupedListStyleProps, IGroupedListStyles>;
@@ -8501,6 +8503,7 @@ export interface IWindowWithSegments extends Window {
 
 // @public
 export interface IWithViewportProps {
+    disableResizeObserver?: boolean;
     skipViewportMeasures?: boolean;
 }
 
@@ -10251,6 +10254,9 @@ export class VirtualizedComboBox extends React.Component<IComboBoxProps, {}> imp
 }
 
 
+export * from "@fluentui/date-time-utilities/lib/dateMath/dateMath";
+export * from "@fluentui/date-time-utilities/lib/dateValues/dateValues";
+export * from "@fluentui/date-time-utilities/lib/dateValues/timeConstants";
 export * from "@fluentui/react-focus";
 export * from "@fluentui/react-window-provider";
 export * from "@uifabric/icons";

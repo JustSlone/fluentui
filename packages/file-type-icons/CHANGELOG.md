@@ -1,8 +1,26 @@
 # Change Log - @uifabric/file-type-icons
 
-This log was last generated on Fri, 23 Oct 2020 12:21:51 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Dec 2020 12:30:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## [7.6.22](https://github.com/microsoft/fluentui/tree/@uifabric/file-type-icons_v7.6.22)
+
+Thu, 03 Dec 2020 12:30:04 GMT 
+[Compare changes](https://github.com/microsoft/fluentui/compare/@uifabric/file-type-icons_v7.6.21..@uifabric/file-type-icons_v7.6.22)
+
+### Patches
+
+- Pointing to the new CDN that has the on-brand PowerBI filetype icons. Adding support for .mcworld Minecraft distinct file icons. ([PR #15974](https://github.com/microsoft/fluentui/pull/15974) by caperez@microsoft.com)
+
+## [7.6.21](https://github.com/microsoft/fluentui/tree/@uifabric/file-type-icons_v7.6.21)
+
+Wed, 18 Nov 2020 12:26:33 GMT 
+[Compare changes](https://github.com/microsoft/fluentui/compare/@uifabric/file-type-icons_v7.6.15..@uifabric/file-type-icons_v7.6.21)
+
+### Patches
+
+- Icons can now be requested using the getFileTypeIconAsHTMLString API, for compatibility with non-React environments. ([PR #15405](https://github.com/microsoft/fluentui/pull/15405) by arkgupta@microsoft.com)
 
 ## [7.6.15](https://github.com/microsoft/fluentui/tree/@uifabric/file-type-icons_v7.6.15)
 
