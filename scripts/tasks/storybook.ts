@@ -40,7 +40,7 @@ export function buildStorybookTask(options?: { quiet?: boolean }) {
 
     await storybook({
       mode: 'static',
-      staticDir: [path.join(process.cwd(), 'static')],
+      //staticDir: [path.join(process.cwd(), 'static')],
       configDir: fs.existsSync(localConfigDir)
         ? localConfigDir
         : path.join(findGitRoot(), 'packages/react-examples/.storybook'),

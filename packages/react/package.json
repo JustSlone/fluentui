@@ -22,6 +22,7 @@
     "just": "just-scripts",
     "lint": "just-scripts lint",
     "start": "just-scripts dev:storybook",
+    "build-storybook": "just-scripts storybook:build",
     "start:legacy": "yarn workspace @fluentui/public-docsite-resources start",
     "start-test": "just-scripts jest-watch",
     "test": "just-scripts test",
