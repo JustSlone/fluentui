@@ -7,7 +7,7 @@ export type SkeletonItemSlots = {
 /**
  * Sizes for the SkeletonItem
  */
-export type SkeletonItemSize = 8 | 12 | 16 | 20 | 24 | 28 | 32 | 36 | 40 | 48 | 56 | 64 | 72 | 96 | 120 | 128;
+export type SkeletonItemSize = 8 | 12 | 14 | 16 | 20 | 22 | 24 | 28 | 32 | 36 | 40 | 48 | 52 | 56 | 64 | 72 | 92 | 96 | 120 | 128;
 
 /**
  * SkeletonItem Props
