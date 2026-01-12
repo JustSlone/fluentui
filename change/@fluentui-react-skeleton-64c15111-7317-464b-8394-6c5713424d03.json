@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add sizes 14, 22, 52, and 92 to SkeletonItem to match typography line-heights",
+  "packageName": "@fluentui/react-skeleton",
+  "email": "jslone@microsoft.com",
+  "dependentChangeType": "patch"
+}
